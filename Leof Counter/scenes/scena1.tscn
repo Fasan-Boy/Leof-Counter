@@ -1,0 +1,239 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://entities/assets/leonardosaponara-29-07-2023-0002.jpeg" type="Texture" id=1]
+[ext_resource path="res://entities/assets/music.mp3" type="AudioStream" id=2]
+[ext_resource path="res://entities/assets/+ Key.png" type="Texture" id=3]
+[ext_resource path="res://entities/assets/- Key.png" type="Texture" id=4]
+[ext_resource path="res://scenes/minusp1.gd" type="Script" id=5]
+[ext_resource path="res://entities/assets/+ Keyp.png" type="Texture" id=6]
+[ext_resource path="res://entities/assets/- Keyp.png" type="Texture" id=7]
+[ext_resource path="res://scenes/+plusp1.gd" type="Script" id=8]
+[ext_resource path="res://scenes/plusp2.gd" type="Script" id=9]
+[ext_resource path="res://scenes/minusp2.gd" type="Script" id=10]
+[ext_resource path="res://entities/assets/d20.png" type="Texture" id=11]
+[ext_resource path="res://scenes/risultato.gd" type="Script" id=12]
+[ext_resource path="res://scenes/dice.gd" type="Script" id=13]
+[ext_resource path="res://entities/assets/Born2bSportyV10.ttf" type="DynamicFontData" id=14]
+[ext_resource path="res://entities/assets/feelings of the night.mp3" type="AudioStream" id=15]
+[ext_resource path="res://scenes/Control.gd" type="Script" id=16]
+[ext_resource path="res://scenes/SafeMode.gd" type="Script" id=17]
+[ext_resource path="res://entities/assets/mtg.jpg" type="Texture" id=18]
+[ext_resource path="res://scenes/UnsafeMode.gd" type="Script" id=19]
+
+[sub_resource type="GDScript" id=1]
+
+[sub_resource type="DynamicFont" id=2]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 14 )
+
+[sub_resource type="RectangleShape2D" id=7]
+
+[sub_resource type="RectangleShape2D" id=8]
+
+[sub_resource type="DynamicFont" id=3]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 14 )
+
+[sub_resource type="DynamicFont" id=4]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 14 )
+
+[sub_resource type="DynamicFont" id=5]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 14 )
+
+[sub_resource type="DynamicFont" id=6]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 14 )
+
+[node name="Node2D" type="Node2D"]
+script = SubResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+margin_left = -3.0
+margin_top = -288.0
+margin_right = 1077.0
+margin_bottom = 522.0
+rect_scale = Vector2( 1.53, 1.53 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Camera2D" type="Camera2D" parent="CanvasLayer/TextureRect"]
+position = Vector2( 3.33333, 125 )
+scale = Vector2( 0.833333, 0.833333 )
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 16 )
+
+[node name="plusp1" type="TouchScreenButton" parent="CanvasLayer/Control"]
+position = Vector2( 263, 610 )
+scale = Vector2( 3, 3 )
+normal = ExtResource( 3 )
+pressed = ExtResource( 6 )
+action = "ui_right"
+script = ExtResource( 8 )
+
+[node name="minusp1" type="TouchScreenButton" parent="CanvasLayer/Control"]
+position = Vector2( 46, 610 )
+scale = Vector2( 3, 3 )
+normal = ExtResource( 4 )
+pressed = ExtResource( 7 )
+action = "ui_left"
+script = ExtResource( 5 )
+
+[node name="plusp2" type="TouchScreenButton" parent="CanvasLayer/Control"]
+position = Vector2( 1410, 610 )
+scale = Vector2( 3, 3 )
+normal = ExtResource( 3 )
+pressed = ExtResource( 6 )
+action = "ui_up"
+script = ExtResource( 9 )
+
+[node name="minusp2" type="TouchScreenButton" parent="CanvasLayer/Control"]
+position = Vector2( 1183, 610 )
+scale = Vector2( 3, 3 )
+normal = ExtResource( 4 )
+pressed = ExtResource( 7 )
+action = "ui_down"
+script = ExtResource( 10 )
+
+[node name="dice" type="TouchScreenButton" parent="CanvasLayer/Control"]
+position = Vector2( 817, 16 )
+scale = Vector2( 0.2, 0.2 )
+normal = ExtResource( 11 )
+script = ExtResource( 13 )
+
+[node name="risultato" type="Label" parent="CanvasLayer/Control"]
+margin_left = 817.0
+margin_top = 180.0
+margin_right = 829.0
+margin_bottom = 196.0
+rect_scale = Vector2( 10, 10 )
+custom_fonts/font = SubResource( 2 )
+align = 1
+script = ExtResource( 12 )
+
+[node name="Timer" type="Timer" parent="CanvasLayer/Control/risultato"]
+wait_time = 3.0
+autostart = true
+
+[node name="talk" type="TouchScreenButton" parent="CanvasLayer/Control"]
+visible = false
+position = Vector2( 295, 368 )
+scale = Vector2( 5, 5 )
+shape = SubResource( 7 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CanvasLayer/Control/talk"]
+position = Vector2( 10.2, 11 )
+stream = ExtResource( 15 )
+volume_db = 6.442
+
+[node name="TimerTalk" type="Timer" parent="CanvasLayer/Control/talk/AudioStreamPlayer2D"]
+wait_time = 30.0
+autostart = true
+
+[node name="SafeMode" type="TouchScreenButton" parent="CanvasLayer/Control"]
+position = Vector2( 729, 190 )
+scale = Vector2( 15, 21 )
+shape = SubResource( 8 )
+script = ExtResource( 17 )
+
+[node name="UnsafeMode" type="TouchScreenButton" parent="CanvasLayer/Control"]
+visible = false
+position = Vector2( 729, 190 )
+scale = Vector2( 15, 21 )
+shape = SubResource( 8 )
+script = ExtResource( 19 )
+
+[node name="lp1" type="Label" parent="CanvasLayer"]
+margin_left = 167.0
+margin_top = 635.0
+margin_right = 196.0
+margin_bottom = 649.0
+rect_scale = Vector2( 4, 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "20"
+
+[node name="lp2" type="Label" parent="CanvasLayer"]
+margin_left = 1318.0
+margin_top = 635.0
+margin_right = 1347.0
+margin_bottom = 649.0
+rect_scale = Vector2( 4, 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "20"
+
+[node name="text" type="Label" parent="CanvasLayer"]
+margin_left = 435.0
+margin_top = 674.0
+margin_right = 837.0
+margin_bottom = 692.0
+rect_scale = Vector2( 1.7, 1.7 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 5 )
+text = "\" E se ciò che vediamo riflesso nello specchio non fosse reale? \""
+
+[node name="me" type="Label" parent="CanvasLayer"]
+margin_left = 25.0
+margin_top = 27.0
+margin_right = 65.0
+margin_bottom = 43.0
+rect_scale = Vector2( 6, 6 )
+custom_fonts/font = SubResource( 6 )
+text = "ME"
+
+[node name="you" type="Label" parent="CanvasLayer"]
+margin_left = 1450.0
+margin_top = 27.0
+margin_right = 1490.0
+margin_bottom = 43.0
+rect_scale = Vector2( 6, 6 )
+custom_fonts/font = SubResource( 6 )
+text = "YOU"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+autoplay = true
+
+[node name="Mtg" type="TextureRect" parent="."]
+margin_top = -120.0
+margin_right = 1083.0
+margin_bottom = 693.0
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Camera2D" type="Camera2D" parent="Mtg"]
+position = Vector2( 420.5, 241.5 )
+scale = Vector2( 0.833333, 0.833333 )
+current = true
+
+[connection signal="pressed" from="CanvasLayer/Control/plusp1" to="CanvasLayer/Control/plusp1" method="_on_plusp1_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/minusp1" to="CanvasLayer/Control/minusp1" method="_on_minusp1_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/plusp2" to="CanvasLayer/Control/plusp2" method="_on_plusp2_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/minusp2" to="CanvasLayer/Control/minusp2" method="_on_minusp2_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/dice" to="CanvasLayer/Control/dice" method="_on_dice_pressed"]
+[connection signal="timeout" from="CanvasLayer/Control/risultato/Timer" to="CanvasLayer/Control/risultato" method="_on_Timer_timeout"]
+[connection signal="pressed" from="CanvasLayer/Control/SafeMode" to="CanvasLayer/Control/SafeMode" method="_on_SafeMode_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/UnsafeMode" to="CanvasLayer/Control/UnsafeMode" method="_on_UnsafeMode_pressed"]
